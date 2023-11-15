@@ -1,7 +1,10 @@
 #!/usr/bin/zsh
+# ./run.sh BREW_BUILD REF_ISSUE
 
 set -e
 zsh -n "$0"
+
+export http_proxy=
 
 [[ '-d' == "$1" ]] && {
   shift
@@ -20,13 +23,15 @@ cd "$b"
 
 [[ "$b" == "$(basename "$PWD")" ]]
 
+pwd
+
 rm *.rpm||:
 
 brew download-task "$n"
 
 git add *.rpm
 
-git commit -am "Add rpms for #${b}."
+git commit -am "Add rpms for RHEL-${b}."
 
 git push
 
